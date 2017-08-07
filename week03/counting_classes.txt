@@ -22,18 +22,18 @@ Q2 answer: sort classes.txt | cut -f1 | uniq | wc -l | cut -d' ' -f1
 3) Write a shell pipeline which will print the course with the most classes (and no
 other courses) and how many classes are in this course? 
 
-Q3 answer:
+Q3 answer: sort classes.txt | cut -f1 | uniq -c | sort -nrk1 | head -1
 
 
 4) Write a shell pipeline that prints the room most frequently-used room by CSE classes how often it is used?
 
-Q4 answer:
+Q4 answer: egrep -v 'LAB' classes.txt | cut -f5 | sort | uniq -c | sort -nrk1 | head -1
 
 
 5) Write a shell pipeline  that prints the most popular time-of-day for classes to
 start and how many classes start at that time?
 
-Q5 answer:
+Q5 answer: cut -f4 classes.txt | sort | uniq -c | sort -nrk1 | head -1 | cut -c1-14
 
 
 6) Challenge: write a shell pipeline that prints a list of the course codes (only) of COMP courses that
