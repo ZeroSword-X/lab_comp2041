@@ -1,0 +1,62 @@
+OPTM2111
+Optometry 2A
+OPTM2133
+The Clinical Environment 
+OPTM2190
+Introduction to Clinical Optometry 
+OPTM2211
+Optometry 2B
+OPTM2233
+Optical Dispensing 
+OPTM2291
+Primary Care Optometry 
+OPTM3105
+Disease Processes of the Eye 1 
+OPTM3111
+Optometry 3A
+OPTM3131
+Ocular Disease 3A
+OPTM3133
+Vision Science in the Consulting Room 
+OPTM3201
+Ocular Imaging & Applied Vision Science 
+OPTM3205
+Disease Processes of the Eye 2 
+OPTM3211
+Optometry 3B 
+OPTM3231
+Ocular Disease 3B
+OPTM3233
+Working in the clinical environment 
+OPTM4110
+Optometry 4A
+OPTM4131
+Clinical Optometry 4A
+OPTM4151
+Ocular Therapeutics 4A
+OPTM4211
+Optometry 4B
+OPTM4231
+Clinical Optometry 4B
+OPTM4251
+Ocular Therapeutics 4B
+OPTM4271
+Professional Optometry 
+OPTM4291
+Optometry, Medicine & Patient Management 
+OPTM5111
+Clinical Optometry 5A
+OPTM5131
+Specialist Clinical Optometry 5A
+OPTM5151
+Clinical Ocular Therapeutics 5A
+OPTM5171
+Research Project 5A
+OPTM5211
+Clinical Optometry 5B
+OPTM5231
+Specialist Clinical Optometry 5B
+OPTM5251
+Clinical Ocular Therapeutics 5B
+OPTM5271
+Research Project 5B

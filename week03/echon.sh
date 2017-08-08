@@ -6,13 +6,12 @@ then
 	exit 1
 fi
 
-test "$1" -ge 0 &> /dev/null
+test $1 -ge 0 &> /dev/null
 if [ $? -ne 0 ]
 then
 	echo './echon.sh: argument 1 must be a non-negative integer'
 	exit 1
 fi
-
 
 
 counter=0
