@@ -33,11 +33,11 @@ Q4 answer: egrep -v 'LAB' classes.txt | cut -f5 | sort | uniq -c | sort -nrk1 | 
 5) Write a shell pipeline  that prints the most popular time-of-day for classes to
 start and how many classes start at that time?
 
-Q5 answer: cut -f4 classes.txt | sort | uniq -c | sort -nrk1 | head -1 | cut -c1-14
-
+Q5 answer: cut -f4 classes.txt | cut -c1-6 | sort | uniq -c | sort -nrk1 | head -1 
 
 6) Challenge: write a shell pipeline that prints a list of the course codes (only) of COMP courses that
 run 2 or more  classes of the same type starting at the same time on the same day? (e.g. three tut-labs starting Monday at 10:00)
 
-Q6 answer:
+Q6 answer: cut -f1,3-4 classes.txt | cut -c1-19 | sort | uniq -c | sort -nk1 | egrep -v '^[ ]+[1][ ]+' | cut -c9-16 | sort | uniq -c | cut -c9-16 | sort | egrep 'COMP'
+
 
