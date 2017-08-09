@@ -17,7 +17,7 @@ do
 		then
     		output="$i"
 		else
-			output="$output"$'\n'"$i"
+			output="$output\n$i"
 		fi
 	else
 		output="$output $i"
@@ -37,11 +37,11 @@ do
 		then
     		output="$i"
 		else
-			output="$output"$'\n'"$i"
+			output="$output\n$i"
 		fi
 	else
 		output="$output $i"
 	fi
 done
 
-echo "$output" | sort | uniq
+printf "%b" "$output" | sort | uniq
