@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 if [ $# -eq 0 ]
 then
    printf "Usage: ./email_image.sh <image file(s)>\n"
@@ -11,7 +12,14 @@ exit_status=0
 
 for image in "$@"
 do
-   if ! display $image &> /dev/null 
+   if ! test -e "$image" 
+   then
+      printf "\'$image\' does not exist.\n"
+      exit_status=1
+      continue
+   fi
+
+   if ! display $image &> /dev/null
    then
       printf "Address to e-mail this image to? "
       read email
@@ -25,7 +33,7 @@ do
          then
             printf "$image sent to $email\n"
          else
-            printf "Error: Unable to sent \"$image\"\n"
+            printf "Error: Unable to sent \'$image\'\n"
             exit_status=1
          fi
       else
@@ -35,7 +43,7 @@ do
       fi
 
    else
-      printf "\"$image\" cannot be displayed. The image will not be sent\n"
+      printf "\'$image\' cannot be displayed. The image will not be sent\n"
       exit_status=1
       continue
    fi
