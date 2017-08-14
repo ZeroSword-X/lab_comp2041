@@ -25,7 +25,7 @@ do
          title=`printf "%s" "$line" | cut -d'/' -f3 | sed -e 's/^\(.\+\) - \(.\+\) - \(.\+\)$/\2/g'` 
          artist=`printf "%s" "$line" | cut -d'/' -f3 | sed -e 's/^\(.\+\) - \(.\+\) - \(.\+\)$/\3/g' -e 's/.mp3//g'` 
 
-         id3 -a "$artist" -A "$album" -t "$title" -T "$track" -y "$year" "$line" > /dev/null
+         id3 -a "$artist" -A "$album" -t "$title" -T "$track" -y "$year" "$line" &> /dev/null
       done < $TMP_FILE     
 
       rm -f $TMP_FILE
