@@ -19,7 +19,7 @@ do
       continue
    fi
 
-   if ! display $image &> /dev/null
+   if display $image &> /dev/null
    then
       printf "Address to e-mail this image to? "
       read email
