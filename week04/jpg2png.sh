@@ -15,8 +15,10 @@ do
 
    if test -e "$new_image"
    then
-      printf "$new_image already exists\n"
-      exit_status=1
+      # There is existing png image with the same name as $new_image
+      # ignore it and processing the next argument
+      printf "$new_image already exists\n" >&2
+      exit_status=1  
       continue
    fi
 

@@ -2,7 +2,7 @@
 
 if [ $# -eq 0 ]
 then
-   printf "Usage: ./fix_id3_tags.sh <music file(s)>\n"
+   printf "Usage: ./fix_id3_tags.sh <music file(s)>\n" >&2
    exit 1
 fi
 
@@ -14,6 +14,7 @@ for arg in "$@"
 do
    if test -d "$arg"
    then
+      # If the argument is a directory, use 'find' to locate all mp3 files under that directory and direct the stdout to a temp file
       find "$arg" -name '*.mp3' -print > $TMP_FILE
 
       while read line
@@ -40,7 +41,7 @@ do
 
       id3 -a "$artist" -A "$album" -t "$title" -T "$track" -y "$year" "$arg" > /dev/null
    else
-      printf "\'$arg\' does not exist !\n"
+      printf "\'$arg\' does not exist !\n" >&2
       exit_status=1
    fi
 done

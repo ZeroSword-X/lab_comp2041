@@ -1,9 +1,9 @@
 #!/bin/sh
 
-
+# If there is no argument, print the manual
 if [ $# -eq 0 ]
 then
-   printf "Usage: ./email_image.sh <image file(s)>\n"
+   printf "Usage: ./email_image.sh <image file(s)>\n" >&2
    exit 1
 fi
 
@@ -12,9 +12,11 @@ exit_status=0
 
 for image in "$@"
 do
+   
+   # If the given image is not existed
    if ! test -e "$image" 
    then
-      printf "\'$image\' does not exist.\n"
+      printf "\'$image\' does not exist.\n" >&2
       exit_status=1
       continue
    fi
@@ -33,17 +35,18 @@ do
          then
             printf "$image sent to $email\n"
          else
-            printf "Error: Unable to sent \'$image\'\n"
+            printf "Error: Unable to sent \'$image\'\n" >&2
             exit_status=1
+            continue
          fi
       else
-         printf "$email is not a valid email address. $image will not be sent\n"
+         printf "$email is not a valid email address. $image will not be sent\n" >&2
          exit_status=1
          continue
       fi
 
    else
-      printf "\'$image\' cannot be displayed. The image will not be sent\n"
+      printf "\'$image\' cannot be displayed. The image will not be sent\n" >&2
       exit_status=1
       continue
    fi
