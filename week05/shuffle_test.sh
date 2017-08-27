@@ -4,7 +4,7 @@ tmp1="/tmp/TMP1_$$"
 tmp2="/tmp/TMP2_$$"
 
 seq 0 4 | ./shuffle.pl > $tmp1
-seq 0 4 | ./shuffle.pl > $tmp2
+seq 0 4  > $tmp2
 
 if diff $tmp1 $tmp2 &> /dev/null
 then
