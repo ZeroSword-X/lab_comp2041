@@ -44,10 +44,11 @@ foreach $file (glob "lyrics/*.txt") {
    $file =~ s/[^a-zA-Z]/ /g;
    $name = $file;
 
-   $table{$name}{"total"} = $total;
+   $total{$name}= $total;
    $table{$name}{$word} = $count;
 }
 
 foreach $artist (sort keys %table) {
-   printf "%4d/%6d = %.9f %s\n", $table{$artist}{$word}, $table{$artist}{"total"}, $table{$artist}{$word}/$table{$artist}{"total"}, $artist;
+   printf "log((%d+1)/%6d) = %8.4f %s\n", $table{$artist}{$word}, $total{$artist}, 
+                                          log(($table{$artist}{$word}+1)/$total{$artist}), $artist;
 } 
