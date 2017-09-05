@@ -2,6 +2,7 @@
 
 import re
 import sys
+import math
 import glob
 
 word = sys.argv[1].lower()
@@ -36,5 +37,5 @@ for file in glob.glob("lyrics/*.txt"):
    f.close()
 
 for key in sorted(n_words.keys()):
-   print("%4d/%6d = %.9f %s" %(n_matches[key], n_words[key], 
-                               n_matches[key]/n_words[key], key))
+   print("log((%d+1)/%6d) = %8.4f %s" %(n_matches[key], n_words[key], 
+                                        math.log((n_matches[key]+1)/n_words[key]), key))

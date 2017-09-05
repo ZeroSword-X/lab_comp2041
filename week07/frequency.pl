@@ -25,7 +25,7 @@ foreach $file (glob "lyrics/*.txt") {
    }
 
    $artist = $file;
-   $artist =~ s/lyrics\/(.*).txt/$1/;
+   $artist =~ s/lyrics\/(.*)\.txt/$1/;
    $artist =~ s/[^a-zA-Z]/ /g;
 
    $n_words{$artist} = $total;
