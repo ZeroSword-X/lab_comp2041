@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 for f in *.htm
 do
    name=`printf "%s" "$f" | cut -d'.' -f1`
