@@ -5,7 +5,7 @@ while($line = <STDIN>) {
    undef @words;
 
    @words = split(/[^a-zA-Z]+/, $line);
-   
+
    foreach $word (@words) {
       if($word) {
          $num_words++;

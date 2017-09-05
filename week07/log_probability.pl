@@ -1,54 +1,40 @@
 #!/usr/bin/perl -w 
 
-sub totalWords {
-   my $num_words = 0;
-   open my $F, "<", "$_[0]" or die;  
- 
-   while($line = <$F>) {
-      undef my @words;
-
-      $line =~ s/^[^a-zA-Z]+//;
-      @words = split(/[^a-zA-Z]+/, $line);
-      $num_words += @words;
-   }
-
-   close $F;
-   return $num_words;
-}
-
-sub countWord {
-   my $word = $_[0];
-   open my $F, "<", "$_[1]" or die;
-
-   my $count = 0;
-
-   while($line = <$F>) {
-      undef my @words;
-      $line = lc $line;
-   
-      @words = ($line =~ /\b$word\b/g);
-      $count += @words;
-   }
-
-   close $F;
-   return $count;
-}
-
 $word = lc $ARGV[0];
 
 foreach $file (glob "lyrics/*.txt") {
-   $total = totalWords($file);
-   $count = countWord($word, $file);  
+   open F, "<", "$file" or die "$0: Can't open $file: $!";
+   $count = 0;
+   $total = 0;
 
-   $file =~ s/lyrics\/(.*).txt/$1/;
-   $file =~ s/[^a-zA-Z]/ /g;
-   $name = $file;
+   while($line = <F>) {
+      undef @words;
 
-   $total{$name}= $total;
-   $table{$name}{$word} = $count;
+      $line = lc $line;
+      @words = split(/[^a-zA-Z]+/, $line);
+
+      foreach $w (@words) {
+         if($w) {
+            $total++;
+
+            if($w eq $word) {
+               $count++;
+            }
+         }
+      }
+   }
+
+   $artist = $file;
+   $artist =~ s/lyrics\/(.*).txt/$1/;
+   $artist =~ s/[^a-zA-Z]/ /g;
+
+   $n_words{$artist} = $total;
+   $table{$artist}{$word} = $count;
+   close F;
 }
 
 foreach $artist (sort keys %table) {
-   printf "log((%d+1)/%6d) = %8.4f %s\n", $table{$artist}{$word}, $total{$artist}, 
-                                          log(($table{$artist}{$word}+1)/$total{$artist}), $artist;
+   printf "log((%d+1)/%6d) = %8.4f %s\n", $table{$artist}{$word}, $n_words{$artist}, 
+                                          log(($table{$artist}{$word}+1)/$n_words{$artist}), 
+                                          $artist;
 } 
