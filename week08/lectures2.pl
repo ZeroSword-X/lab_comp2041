@@ -20,11 +20,10 @@ sub trim($) {
 
 # ------------------------------------------------------------------------------
 
-if ($ARGV[0] eq "-d") {
-   $flag = 1;
-   shift @ARGV;
+if ($ARGV[0] eq "-d" || $ARGV[0] eq "-t") {
+   $flag = shift @ARGV;
 } else {
-   $flag = 0;
+   $flag = '';
 }
 
 foreach $course (@ARGV) {
@@ -70,7 +69,6 @@ foreach $course (@ARGV) {
                $lines[0] =~ s/^U/X/;
             }
 
-
             if ($flag) {
                @lecture_time = split(/,\s/, $lines[5]);
 
@@ -79,15 +77,13 @@ foreach $course (@ARGV) {
                   ($start, $end) = ($time =~ /(\d{2})\:\d{2}/g);
 
                   while ($start < $end) {
-                     $slot = "$lines[0] $course $day $start";
-                     if (!defined $timetable{$course}{$slot}) {
-                        $timetable{$course}{$slot} = 1;
-                        printf "%s %s %s %d\n", "$lines[0]", "$course", "$day", "$start";
+                     if (!defined $timetable{$lines[0]}{$course}{$day}{$start}) {
+                        $timetable{$lines[0]}{$course}{$day}{$start} = 1;
+                        printf "%s %s %s %d\n", "$lines[0]", "$course", "$day", "$start" if ($flag eq "-d");
                      }
                      $start++;
                   }
                }
-
             } else {
                next if defined $timetable{$course}{$lines[0]}{$lines[5]};
                $timetable{$course}{$lines[0]}{$lines[5]} = 1;
@@ -98,4 +94,44 @@ foreach $course (@ARGV) {
    }
    
    close F;
+}
+
+
+if ($flag eq "-t") {
+   @days = ("Mon", "Tue", "Wed", "Thu", "Fri");
+
+   foreach $semester (sort keys %timetable) {
+      printf "%-3s   ", "$semester";
+
+      foreach $day (@days) {
+         printf "   $day";
+      }
+      printf "\n";
+
+
+      foreach $time (9..20) {
+         if($time == 9) {
+            $time = "09";
+         }
+         printf "$time\:00";
+
+         $s = "";
+         foreach $day (@days) {
+            $total = 0;
+
+            foreach $course (keys %{$timetable{$semester}}) {
+               if (defined $timetable{$semester}{$course}{$day}{$time}) {
+                  $total++;
+               }
+            }
+ 
+            if ($total > 0) {
+               $s .= "     $total";
+            } else {
+               $s .= "      ";
+            }
+         }
+         printf "%s\n", "$s";   
+      }
+   }
 }
