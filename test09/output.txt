@@ -1,0 +1,215 @@
+Test distinct_lines_0 (./distinct_lines.py 3) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+3 distinct line seen after 5 lines read.
+
+The correct 1 lines of output for this test were:
+3 distinct lines seen after 6 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- 3 distinct line seen after 5 lines read.
+?                            ^
++ 3 distinct lines seen after 6 lines read.
+?                +            ^
+
+The input for this test was:
+hi
+hello world
+hi
+hello world
+hello world
+bye
+
+You can reproduce this test by executing these commands:
+echo -e "hi\nhello world\nhi\nhello world\nhello world\nbye" | ./distinct_lines.py 3
+Test distinct_lines_1 (./distinct_lines.py 3) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+3 distinct line seen after 5 lines read.
+
+The correct 1 lines of output for this test were:
+3 distinct lines seen after 6 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- 3 distinct line seen after 5 lines read.
+?                            ^
++ 3 distinct lines seen after 6 lines read.
+?                +            ^
+
+The input for this test was:
+hi
+hello world
+   hi
+hello        world
+   HELLO  world
+bye
+
+You can reproduce this test by executing these commands:
+echo -e "hi\nhello world\n   hi\nhello        world\n   HELLO  world\nbye" | ./distinct_lines.py 3
+Test distinct_lines_2 (./distinct_lines.py 4) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+End of input reached after 7 lines read -  4 different lines not seen.
+
+The correct 1 lines of output for this test were:
+4 distinct lines seen after 7 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- End of input reached after 7 lines read -  4 different lines not seen.
++ 4 distinct lines seen after 7 lines read.
+
+The input for this test was:
+how
+are
+you
+are
+how
+are
+well
+
+You can reproduce this test by executing these commands:
+echo -e "how\nare\nyou\nare\nhow\nare\nwell" | ./distinct_lines.py 4
+Test distinct_lines_3 (./distinct_lines.py 3) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+End of input reached after 3 lines read -  3 different lines not seen.
+
+The correct 1 lines of output for this test were:
+3 distinct lines seen after 3 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- End of input reached after 3 lines read -  3 different lines not seen.
++ 3 distinct lines seen after 3 lines read.
+
+The input for this test was:
+how
+are
+you
+
+You can reproduce this test by executing these commands:
+echo -e "how\nare\nyou" | ./distinct_lines.py 3
+Test distinct_lines_4 (./distinct_lines.py 7) - passed
+Test distinct_lines_5 (./distinct_lines.py 2) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+2 distinct line seen after 5 lines read.
+
+The correct 1 lines of output for this test were:
+2 distinct lines seen after 2 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- 2 distinct line seen after 5 lines read.
+?                            ^
++ 2 distinct lines seen after 2 lines read.
+?                +            ^
+
+The input for this test was:
+hi
+how
+are
+you
+hi
+
+You can reproduce this test by executing these commands:
+echo -e "hi\nhow\nare\nyou\nhi" | ./distinct_lines.py 2
+Test distinct_lines_6 (./distinct_lines.py 2) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+2 distinct line seen after 5 lines read.
+
+The correct 1 lines of output for this test were:
+2 distinct lines seen after 2 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- 2 distinct line seen after 5 lines read.
+?                            ^
++ 2 distinct lines seen after 2 lines read.
+?                +            ^
+
+The input for this test was:
+hi
+how
+are
+you
+hi
+hello
+
+You can reproduce this test by executing these commands:
+echo -e "hi\nhow\nare\nyou\nhi\nhello" | ./distinct_lines.py 2
+Test distinct_lines_7 (./distinct_lines.py 2) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+2 distinct line seen after 5 lines read.
+
+The correct 1 lines of output for this test were:
+2 distinct lines seen after 2 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- 2 distinct line seen after 5 lines read.
+?                            ^
++ 2 distinct lines seen after 2 lines read.
+?                +            ^
+
+The input for this test was:
+line repeated three times
+line repeapted twice
+line repeated 4 times
+line repeated once
+line repeapted twice
+line repeated three times
+line repeated 4 times
+line repeated three times
+line repeated 4 times
+line repeated 4 times
+
+You can reproduce this test by executing these commands:
+echo -e "line repeated three times\nline repeapted twice\nline repeated 4 times\nline repeated once\nline repeapted twice\nline repeated three times\nline repeated 4 times\nline repeated three times\nline repeated 4 times\nline repeated 4 times" | ./distinct_lines.py 2
+Test distinct_lines_8 (./distinct_lines.py 3) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+3 distinct line seen after 8 lines read.
+
+The correct 1 lines of output for this test were:
+3 distinct lines seen after 3 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- 3 distinct line seen after 8 lines read.
+?                            ^
++ 3 distinct lines seen after 3 lines read.
+?                +            ^
+
+The input for this test was:
+line repeated three times
+line repeapted twice
+line repeated 4 times
+line repeated once
+line repeapted twice
+line repeated three times
+line repeated 4 times
+line repeated three times
+line repeated 4 times
+line repeated 4 times
+
+You can reproduce this test by executing these commands:
+echo -e "line repeated three times\nline repeapted twice\nline repeated 4 times\nline repeated once\nline repeapted twice\nline repeated three times\nline repeated 4 times\nline repeated three times\nline repeated 4 times\nline repeated 4 times" | ./distinct_lines.py 3
+Test distinct_lines_9 (./distinct_lines.py 4) - failed (Incorrect output)
+Your program produced these 1 lines of output:
+4 distinct line seen after 10 lines read.
+
+The correct 1 lines of output for this test were:
+4 distinct lines seen after 4 lines read.
+
+The difference between your output(-) and the correct output(+) is:
+- 4 distinct line seen after 10 lines read.
+?                            ^^
++ 4 distinct lines seen after 4 lines read.
+?                +            ^
+
+The input for this test was:
+line repeated three times
+line repeapted twice
+line repeated 4 times
+line repeated once
+line repeapted twice
+line repeated three times
+line repeated 4 times
+line repeated three times
+line repeated 4 times
+line repeated 4 times
+
+You can reproduce this test by executing these commands:
+echo -e "line repeated three times\nline repeapted twice\nline repeated 4 times\nline repeated once\nline repeapted twice\nline repeated three times\nline repeated 4 times\nline repeated three times\nline repeated 4 times\nline repeated 4 times" | ./distinct_lines.py 4
+Test distinct_lines_10 (./distinct_lines.py 5) - passed
+2 tests passed 9 tests failed
