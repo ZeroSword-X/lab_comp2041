@@ -6,65 +6,77 @@ use CGI::Carp qw/fatalsToBrowser warningsToBrowser/;
 $max_number_to_guess = 99;
 
 sub main() {
-    # print start of HTML ASAP to assist debugging if there is an error in the script
-    print page_header();
+   # print start of HTML ASAP to assist debugging if there is an error in the script
+   print page_header();
     
-    # Now tell CGI::Carp to embed any warning in HTML
-    warningsToBrowser(1);
+   # Now tell CGI::Carp to embed any warning in HTML
+   warningsToBrowser(1);
     
-	$username = param('username') || '';
-	$password = param('password') || '';
+   $username = param('username') || '';
+   $password = param('password') || '';
 
-	# remove any non-word characters from username 
-	# another malicious user could include ../ in username
-	$username =~ s/\W//g;
-	# limit username to 32 word characters
-	$username = substr $username, 0, 32;
-	
+   # remove any non-word characters from username 
+   # another malicious user could include ../ in username
+   $username =~ s/\W//g;
+   # limit username to 32 word characters
+   $username = substr $username, 0, 32;
+   
 
-	if (!$username || !$password) {
-		print login_form();
-	} else {
+   if (!$username || !$password) {
+      print login_form();
+   } else {
       
-        if (!check_identity($username, $password)) {
-           print unknown_user_form();
-           print page_trailer();
-           exit 1;
-        } 
+      if (!check_identity($username, $password)) {
+         print unknown_user_form();
+         print page_trailer();
+         exit 1;
+      } 
 
-		$guess = param('guess') || '';
-		# remove any non-digit characters from guess
-		$guess =~ s/\D//g;
-	
-		$number_to_guess = param('number_to_guess') || '';
-		$number_to_guess =~ s/\D//g;
+      $guess = param('guess') || '';
+      # remove any non-digit characters from guess
+      $guess =~ s/\D//g;
+   
+      $number_to_guess = param('number_to_guess') || '';
+      # $number_to_guess =~ s/\D//g;
+ 
+      if ($number_to_guess eq '') {
+         $number_to_guess = 1 + int(rand $max_number_to_guess);
+           
+         open my $num, ">", "database/$username" or die "$0: $!";         
+         print $num "$number_to_guess\n";
+         close $num;
 
-	
-		if ($number_to_guess eq '') {
-			$number_to_guess = 1 + int(rand $max_number_to_guess);
- 			print "I've thought of a number\n";
-			print guess_number_form($username, $password, $number_to_guess);
-		} elsif ($guess eq '') {
-			print guess_number_form($username, $password, $number_to_guess);
-		} elsif ($guess == $number_to_guess) {
-    		print "You guessed right, it was $number_to_guess.\n";
-    		print new_game_form($username, $password);
-		} elsif ($guess < $number_to_guess) {
-    		print "Its higher than $guess.\n";
-			print guess_number_form($username, $password, $number_to_guess);
-		} else {
-    		print "Its lower than $guess.\n";
-			print guess_number_form($username, $password, $number_to_guess);
-		} 
-	}
-	
+         $number_to_guess = "X";
+         print "I've thought of a number\n";
+         print guess_number_form($username, $password, $number_to_guess);
+      } elsif ($guess eq '') {
+         print guess_number_form($username, $password, $number_to_guess);
+      } else {
+         open my $num, "<", "database/$username" or die "$0: $!";
+         my $target = <$num>;
+         chomp $target;
+         close $num;
+
+         if ($guess == $target) {
+            print "You guessed right, it was $target.\n";
+            print new_game_form($username, $password);
+         } elsif ($guess < $target) {
+            print "Its higher than $guess.\n";
+            print guess_number_form($username, $password, $number_to_guess);
+         } else {
+            print "Its lower than $guess.\n";
+            print guess_number_form($username, $password, $number_to_guess);
+         }
+      } 
+   }
+   
     print page_trailer();
 }
 
 # form to allow user to supply username/password 
 
 sub login_form {
-	return <<eof;
+   return <<eof;
     <form method="POST" action="">
         Username: <input type="textfield" name="username">
         <p>
@@ -135,14 +147,14 @@ sub check_identity($$) {
 #
 
 sub guess_number_form {
-	my ($username, $password, $number_to_guess) = @_;
-	return <<eof;
+   my ($username, $password, $number_to_guess) = @_;
+   return <<eof;
     <form method="POST" action="">
-    	Enter a guess between 1 and $max_number_to_guess (inclusive):
-     	<input type="textfield" name="guess">
-     	<input type="hidden" name="username" value="$username">
-     	<input type="hidden" name="password" value="$password">
-     	<input type="hidden" name="number_to_guess" value="$number_to_guess">
+       Enter a guess between 1 and $max_number_to_guess (inclusive):
+        <input type="textfield" name="guess">
+        <input type="hidden" name="username" value="$username">
+        <input type="hidden" name="password" value="$password">
+        <input type="hidden" name="number_to_guess" value="$number_to_guess">
      </form>
 eof
 }
@@ -151,12 +163,12 @@ eof
 # form to allow user to go to a new game
 #
 sub new_game_form {
-	my ($username, $password) = @_;
-	return <<eof;
+   my ($username, $password) = @_;
+   return <<eof;
     <form method="POST" action="">
         <input type="submit" value="Play Again">
-     	<input type="hidden" name="username" value="$username">
-     	<input type="hidden" name="password" value="$password">
+        <input type="hidden" name="username" value="$username">
+        <input type="hidden" name="password" value="$password">
     </form>
 eof
 }
